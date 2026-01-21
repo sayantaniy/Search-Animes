@@ -24,16 +24,8 @@ const Home = () => {
     }
   }
 
-  const getDominantColor = (anime) => {
-    // Return a gradient based on anime title or use default purple
-    if (!anime) return 'from-purple-600 via-purple-700 to-purple-800'
-    
-    // You can customize colors based on anime here
-    return 'from-gray-600 via-gray-700 to-gray-800'
-  }
-
   return (
-    <div className="fontc min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16">
+    <div className="min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Profile Section */}
         <motion.div

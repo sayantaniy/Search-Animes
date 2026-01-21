@@ -1,5 +1,4 @@
 import { motion } from 'motion/react'
-import { Linkedin } from 'lucide-react'
 
 const Footer = () => {
   return (
