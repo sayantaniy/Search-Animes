@@ -44,20 +44,20 @@ const Search = () => {
         >
           <h1 className="text-4xl font-bold text-white mb-4 text-center">Search Anime</h1>
           <form onSubmit={handleSearch} className="max-w-2xl mx-auto">
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search for your favorite anime..."
-                className="flex-1 px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-lg"
+                className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-base sm:text-lg"
               />
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 disabled={loading}
-                className="px-8 py-4 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 text-white font-semibold hover:bg-white/30 transition-colors disabled:opacity-50"
+                className="px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 text-white font-semibold hover:bg-white/30 transition-colors disabled:opacity-50 whitespace-nowrap"
               >
                 {loading ? 'Searching...' : 'Search'}
               </motion.button>
