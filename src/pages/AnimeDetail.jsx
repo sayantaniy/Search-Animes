@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
-import useWatchedAnime from '../hooks/useWatchedAnime'
+import { useWatchedAnime } from '../context/WatchedContext'
 
 const AnimeDetail = () => {
   const { id } = useParams()
@@ -369,6 +369,9 @@ const AnimeDetail = () => {
           </motion.div>
         </motion.div>
       )}
+    </div>
+  )
+}
 
 export default AnimeDetail
 

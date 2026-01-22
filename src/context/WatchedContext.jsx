@@ -1,28 +1,23 @@
-import { useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 
-/**
- * Custom hook to manage watched anime data with localStorage persistence
- * Scalable structure ready for backend integration
- */
-const useWatchedAnime = () => {
-  const [watched, setWatched] = useState([])
-  const [loading, setLoading] = useState(true)
+const WatchedContext = createContext()
 
-  const STORAGE_KEY = 'anisearch_watched_anime'
+const STORAGE_KEY = 'anisearch_watched_anime'
 
-  // Initialize from localStorage
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY)
-      if (stored) {
-        setWatched(JSON.parse(stored))
-      }
-    } catch (error) {
-      console.error('Error loading watched anime from localStorage:', error)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+// Helper to load initial state from localStorage
+const loadInitialState = () => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    return stored ? JSON.parse(stored) : []
+  } catch (error) {
+    console.error('Error loading watched anime from localStorage:', error)
+    return []
+  }
+}
+
+export const WatchedProvider = ({ children }) => {
+  const [watched, setWatched] = useState(loadInitialState())
+  const [loading, setLoading] = useState(false)
 
   // Persist to localStorage whenever watched changes
   useEffect(() => {
@@ -35,8 +30,6 @@ const useWatchedAnime = () => {
 
   /**
    * Add or update a watched anime entry
-   * @param {Object} animeData - Anime data including mal_id, title, images, etc.
-   * @param {Object} watchData - Watch data (status, episodesWatched, rating, notes, etc.)
    */
   const addToWatched = (animeData, watchData = {}) => {
     const entry = {
@@ -46,9 +39,9 @@ const useWatchedAnime = () => {
       images: animeData.images,
       episodes: animeData.episodes,
       genres: animeData.genres || [],
-      status: watchData.status || 'Watching', // Watching, Completed, Dropped, On Hold
+      status: watchData.status || 'Watching',
       episodesWatched: watchData.episodesWatched || 0,
-      rating: watchData.rating || 0, // 0-10
+      rating: watchData.rating || 0,
       notes: watchData.notes || '',
       dateAdded: watchData.dateAdded || new Date().toISOString(),
       lastWatchedDate: watchData.lastWatchedDate || new Date().toISOString(),
@@ -105,7 +98,7 @@ const useWatchedAnime = () => {
     setWatched([])
   }
 
-  return {
+  const value = {
     watched,
     loading,
     addToWatched,
@@ -115,6 +108,18 @@ const useWatchedAnime = () => {
     isWatched,
     clearAll,
   }
+
+  return (
+    <WatchedContext.Provider value={value}>
+      {children}
+    </WatchedContext.Provider>
+  )
 }
 
-export default useWatchedAnime
+export const useWatchedAnime = () => {
+  const context = useContext(WatchedContext)
+  if (!context) {
+    throw new Error('useWatchedAnime must be used within a WatchedProvider')
+  }
+  return context
+}

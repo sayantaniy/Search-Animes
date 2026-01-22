@@ -5,7 +5,7 @@ import StatusModal from '../components/StatusModal'
 import ConfirmationModal from '../components/ConfirmationModal'
 import EmptyState from '../components/EmptyState'
 import Footer from '../components/Footer'
-import useWatchedAnime from '../hooks/useWatchedAnime'
+import { useWatchedAnime } from '../context/WatchedContext'
 import {
   sortWatchedAnime,
   filterWatchedAnime,
