@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import WatchedCard from '../components/WatchedCard'
 import StatusModal from '../components/StatusModal'
 import ConfirmationModal from '../components/ConfirmationModal'

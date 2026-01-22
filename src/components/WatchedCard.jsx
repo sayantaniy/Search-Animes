@@ -24,7 +24,8 @@ const WatchedCard = ({
         whileHover={{ x: 5 }}
         className="bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 p-4 hover:border-white/40 transition-all"
       >
-        <div className="flex gap-4 items-center">
+        {/* Desktop Layout */}
+        <div className="hidden sm:flex gap-4 items-center">
           {/* Poster */}
           <div className="flex-shrink-0 w-20 h-28 rounded-lg overflow-hidden">
             <img
@@ -57,7 +58,7 @@ const WatchedCard = ({
             </div>
           </div>
 
-          {/* Status & Rating */}
+          {/* Status */}
           <div className="flex-shrink-0 text-right flex flex-col gap-3">
             <div className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getStatusColor(anime.status)}`}>
               {anime.status}
@@ -82,6 +83,62 @@ const WatchedCard = ({
             >
               Remove
             </motion.button>
+          </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="flex sm:hidden gap-4">
+          {/* Poster */}
+          <div className="flex-shrink-0 w-20 h-28 rounded-lg overflow-hidden">
+            <img
+              src={anime.images?.jpg?.image_url}
+              alt={anime.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Right Content */}
+          <div className="flex-1 min-w-0 flex flex-col justify-between">
+            {/* Top Section: Title and Episodes */}
+            <div>
+              <h3 className="text-white font-semibold text-sm leading-tight mb-1">
+                {anime.title}
+              </h3>
+              <p className="text-white/60 text-xs">
+                {anime.episodesWatched}/{anime.episodes || '?'} episodes
+              </p>
+            </div>
+
+            {/* Middle Section: Progress Bar */}
+            <div className="w-full bg-white/10 rounded-full h-1 overflow-hidden my-2">
+              <div
+                className={`h-full bg-gradient-to-r ${getStatusColor(anime.status)}`}
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            {/* Bottom Section: Status, Edit, Remove */}
+            <div className="flex items-center gap-2">
+              <div className={`px-2 py-0.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getStatusColor(anime.status)}`}>
+                {anime.status}
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onEdit(anime)}
+                className="px-2 py-0.5 bg-white/20 hover:bg-white/30 text-white text-xs font-semibold rounded transition-colors"
+              >
+                Edit
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onRemove(anime.mal_id)}
+                className="px-2 py-0.5 bg-red-500/20 hover:bg-red-500/30 text-red-300 text-xs font-semibold rounded transition-colors"
+              >
+                Remove
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.div>
