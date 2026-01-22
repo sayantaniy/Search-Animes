@@ -85,7 +85,7 @@ const StatusModal = ({ anime, onClose, onSave }) => {
                     onClick={() => handleChange('status', status)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`py-2 px-3 rounded-lg font-semibold text-sm transition-all ${
+                    className={`py-2 px-2 sm:px-3 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
                       formData.status === status
                         ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/50'
                         : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
@@ -127,7 +127,7 @@ const StatusModal = ({ anime, onClose, onSave }) => {
               <label className="block text-white text-sm font-semibold mb-2">
                 Your Rating
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
                 <input
                   type="range"
                   min="0"
@@ -137,14 +137,14 @@ const StatusModal = ({ anime, onClose, onSave }) => {
                   onChange={(e) =>
                     handleChange('rating', parseFloat(e.target.value))
                   }
-                  className="flex-1 h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
+                  className="flex-1 w-full sm:w-auto h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
                   style={{
                     background: `linear-gradient(to right, #fbbf24 0%, #fbbf24 ${
                       (formData.rating / 10) * 100
                     }%, #ffffff20 ${(formData.rating / 10) * 100}%, #ffffff20 100%)`,
                   }}
                 />
-                <div className="px-3 py-1 bg-yellow-400/20 border border-yellow-400/40 rounded-lg text-yellow-300 font-bold text-sm min-w-[50px] text-center">
+                <div className="px-3 py-1 bg-yellow-400/20 border border-yellow-400/40 rounded-lg text-yellow-300 font-bold text-sm w-12 sm:w-auto text-center">
                   {formData.rating}
                 </div>
               </div>

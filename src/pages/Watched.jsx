@@ -65,14 +65,17 @@ const Watched = () => {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="bg-white/10 rounded-2xl aspect-[3/4] animate-pulse" />
-            ))}
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-20 pb-0">
+        <div className="flex-grow">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-white/10 rounded-2xl aspect-[3/4] animate-pulse" />
+              ))}
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }
@@ -80,9 +83,11 @@ const Watched = () => {
   // Empty state
   if (watched.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <EmptyState />
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16 pb-0">
+        <div className="flex-grow">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <EmptyState />
+          </div>
         </div>
         <Footer />
       </div>
@@ -90,8 +95,9 @@ const Watched = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16 pb-0">
+      <div className="flex-grow">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -241,7 +247,6 @@ const Watched = () => {
           </motion.div>
         )}
       </div>
-
       {/* Modals */}
       {editingAnime && (
         <StatusModal
@@ -258,7 +263,7 @@ const Watched = () => {
           onCancel={() => setRemovingAnime(null)}
         />
       )}
-
+      </div>
       <Footer />
     </div>
   )

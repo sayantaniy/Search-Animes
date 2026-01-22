@@ -36,6 +36,11 @@ const WatchedCard = ({
 
           {/* Content */}
           <div className="flex-1 min-w-0">
+            {anime.rating > 0 && (
+              <div className="text-yellow-400 font-bold text-sm mb-2">
+                ⭐ Rating: {anime.rating}/10
+              </div>
+            )}
             <h3 className="text-white font-semibold truncate text-lg">
               {anime.title}
             </h3>
@@ -57,11 +62,6 @@ const WatchedCard = ({
             <div className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getStatusColor(anime.status)}`}>
               {anime.status}
             </div>
-            {anime.rating > 0 && (
-              <div className="text-yellow-400 font-bold text-sm">
-                ⭐ {anime.rating}/10
-              </div>
-            )}
           </div>
 
           {/* Actions */}
@@ -116,13 +116,6 @@ const WatchedCard = ({
         >
           {anime.status}
         </div>
-
-        {/* Rating Badge */}
-        {anime.rating > 0 && (
-          <div className="absolute top-3 left-3 bg-yellow-400/90 backdrop-blur-sm text-gray-900 font-bold px-2 py-1 rounded-full text-xs">
-            ⭐ {anime.rating}
-          </div>
-        )}
 
         {/* Hover Content */}
         {isHovered === anime.mal_id && (
@@ -186,6 +179,12 @@ const WatchedCard = ({
 
       {/* Card Footer */}
       <div className="p-4">
+        {/* Rating on top */}
+        {anime.rating > 0 && (
+          <div className="mb-2 text-yellow-400 font-bold text-sm">
+            ⭐ Rating: {anime.rating}/10
+          </div>
+        )}
         <h3 className="text-white font-semibold line-clamp-2 min-h-[3rem]">
           {anime.title}
         </h3>

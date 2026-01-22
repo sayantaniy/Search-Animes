@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useWatchedAnime } from '../context/WatchedContext'
+import Footer from '../components/Footer'
 
 const AnimeDetail = () => {
   const { id } = useParams()
@@ -77,9 +78,10 @@ const AnimeDetail = () => {
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${backgroundGradient} pt-16`}>
-      {/* Header Section with Large Image */}
-      <motion.div
+    <div className={`flex flex-col min-h-screen bg-gradient-to-br ${backgroundGradient} pt-16 pb-0`}>
+      <div className="flex-grow flex flex-col">
+        {/* Header Section with Large Image */}
+        <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="relative h-[60vh] md:h-[70vh] overflow-hidden"
@@ -369,6 +371,8 @@ const AnimeDetail = () => {
           </motion.div>
         </motion.div>
       )}
+      </div>
+      <Footer />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
+import Footer from '../components/Footer'
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -34,8 +35,9 @@ const Search = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16 pb-0">
+      <div className="flex-grow">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,7 +119,9 @@ const Search = () => {
             No results found for "{searchQuery}"
           </div>
         )}
+        </div>
       </div>
+      <Footer />
     </div>
   )
 }
