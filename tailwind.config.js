@@ -6,6 +6,18 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'],
+        'dm-serif': ['DM Serif Text', 'serif'],
+        'crimson': ['Crimson Text', 'serif'],
+        'instrument': ['Instrument Sans', 'sans-serif'],
+        'geist': ['Geist', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
+        'lexend': ['Lexend', 'sans-serif'],
+        'noto': ['Noto Sans', 'sans-serif'],
+        'jetbrains': ['JetBrains Mono', 'monospace'],
+        'rubik': ['Rubik', 'sans-serif'],
+      },
       backdropBlur: {
         xs: '2px',
       },

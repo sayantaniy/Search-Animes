@@ -34,12 +34,22 @@ const Navbar = () => {
             >
               Search Anime
             </Link>
+            <Link
+              to="/watched"
+              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                location.pathname === '/watched'
+                  ? 'bg-white/20 text-white font-semibold'
+                  : 'text-white/80 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              Watched
+            </Link>
           </div>
           
           <Link to="/" className="flex items-center space-x-2">
             <motion.span
               whileHover={{ scale: 1.1 }}
-              className="text-2xl font-bold text-white"
+              className="text-2xl font-bold text-white logo"
             >
              anisearch
             </motion.span>

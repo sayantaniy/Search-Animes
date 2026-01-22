@@ -1,0 +1,1 @@
+the deployment error was caused due to tailwind and motion(framer motion) version clash.

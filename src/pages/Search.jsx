@@ -34,7 +34,7 @@ const Search = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16 pb-12 fontc">
+    <div className="min-h-screen bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,7 +99,7 @@ const Search = () => {
                   )}
                 </div>
                 <div className="p-4">
-                  <h3 className="text-white font-semibold line-clamp-2 min-h-[3rem] mb-2">
+                  <h3 className="text-white font-semibold line-clamp-2 min-h-[3rem] mb-2 anime-title">
                     {anime.title}
                   </h3>
                   <div className="flex items-center justify-between text-white/70 text-sm">

@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
+import useWatchedAnime from '../hooks/useWatchedAnime'
 
 const AnimeDetail = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
+  const { addToWatched, getWatchedAnime, updateWatchedAnime } = useWatchedAnime()
   const [anime, setAnime] = useState(null)
   const [galleryImages, setGalleryImages] = useState([])
   const [loading, setLoading] = useState(true)
   const [backgroundGradient, setBackgroundGradient] = useState('from-gray-600 via-gray-700 to-gray-800')
+  const [isWatchedModalOpen, setIsWatchedModalOpen] = useState(false)
+  const [watchStatus, setWatchStatus] = useState('Watching')
+  const watchedEntry = getWatchedAnime(parseInt(id))
 
   useEffect(() => {
     fetchAnimeDetails()
@@ -128,6 +134,29 @@ const AnimeDetail = () => {
                   </div>
                 </div>
               )}
+              
+              {/* Add to Watched Button */}
+              <div className="p-4 border-t border-white/20">
+                {watchedEntry ? (
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => navigate('/watched')}
+                    className="w-full py-3 px-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-green-500/50"
+                  >
+                    ✓ In Watched List
+                  </motion.button>
+                ) : (
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setIsWatchedModalOpen(true)}
+                    className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/50"
+                  >
+                    + Add to Watched
+                  </motion.button>
+                )}
+              </div>
             </div>
           </motion.div>
 
@@ -268,9 +297,78 @@ const AnimeDetail = () => {
           </motion.div>
         </div>
       </div>
-    </div>
-  )
-}
+
+      {/* Add to Watched Modal */}
+      {isWatchedModalOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsWatchedModalOpen(false)}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-gradient-to-br from-gray-700/90 via-gray-800/90 to-gray-900/90 backdrop-blur-xl rounded-2xl p-8 max-w-md w-full border border-white/20 shadow-2xl"
+          >
+            <h2 className="text-2xl font-bold text-white mb-4">Add to Watched</h2>
+            <p className="text-white/60 mb-6">{anime.title}</p>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-white text-sm font-semibold mb-3">
+                  Status
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {['Watching', 'Completed', 'On Hold', 'Dropped'].map((status) => (
+                    <motion.button
+                      key={status}
+                      type="button"
+                      onClick={() => setWatchStatus(status)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`py-2 px-3 rounded-lg font-semibold text-sm transition-all ${
+                        watchStatus === status
+                          ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/50'
+                          : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                      }`}
+                    >
+                      {status}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-8">
+              <motion.button
+                type="button"
+                onClick={() => setIsWatchedModalOpen(false)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-1 py-3 px-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors"
+              >
+                Cancel
+              </motion.button>
+              <motion.button
+                type="button"
+                onClick={() => {
+                  addToWatched(anime, { status: watchStatus })
+                  setIsWatchedModalOpen(false)
+                }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-1 py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all shadow-lg shadow-blue-500/50"
+              >
+                Add to List
+              </motion.button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
 
 export default AnimeDetail
 

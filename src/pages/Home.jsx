@@ -42,7 +42,7 @@ const Home = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="text-3xl font-bold text-white mb-4"
+                  className="text-4xl font-bold text-white mb-4"
                 >
                   About Animes
                 </motion.h2>
@@ -50,7 +50,7 @@ const Home = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="text-lg text-white/90"
+                  className="text-lg text-white/90 body-text"
                 >
                   Anime is a diverse medium of animation originating from Japan, characterized by distinct art styles, varied genres, and a global, multibillion-dollar, rapidly growing industry. While often associated with specific visual tropes—such as large eyes, vibrant hair, and detailed backgrounds—it encompasses a vast spectrum of storytelling, ranging from children's shows to complex, mature, and philosophical narratives. 
                 </motion.p>
@@ -124,7 +124,7 @@ const Home = () => {
                     )}
                   </div>
                   <div className="p-4">
-                    <h3 className="text-white font-semibold line-clamp-2 min-h-[3rem]">
+                    <h3 className="text-white font-semibold line-clamp-2 min-h-[3rem] anime-title">
                       {anime.title}
                     </h3>
                   </div>
